@@ -23,18 +23,17 @@
           <h1 class="text-primary mb-0">Reportes</h1>
           <p class="mb-0">Bienvenido al módulo de Administracion de reportes.</p>
         </div>
-  	<!-- ✅ Botón para crear nuevo rol 
-  	<a th:href="@{/reportesmanager/nuevo}" class="btn btn-success">
-  	  <i class="bi bi-plus-circle"></i> + Rol
+  	<!-- ✅ Botón para crear nuevo rol 	-->
+  	<a th:href="@{/reportes/nuevo}" class="btn btn-success">
+  	  <i class="bi bi-plus-circle"></i> + Reporte
   	</a>
-	-->
+
       </div>
 
       <table class="table table-striped table-hover mt-3 align-middle">
         <thead class="table-dark">
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">Usuario</th>
             <th scope="col">Area</th>
 			<th scope="col">Zona</th>
 			<th scope="col">Manager</th>
@@ -47,23 +46,22 @@
         </thead>
         <tbody>
           <!-- ✅ Recorre la lista de usuarios -->
-          <tr th:each="reportemanager : ${reportesmanager}">
-  		<td th:text="${reportemanager.reporteID}"></td>
-            <td th:text="${reportemanager.usuario.nombreCompleto}"></td>
-            <td th:text="${reportemanager.area.nombreArea}"></td>
-			<td th:text="${reportemanager.zona.nombreZona}"></td>
-			<td th:text="${reportemanager.manager.nombreCompleto}"></td>
-			<td th:text="${reportemanager.titulo}"></td>
-			<td th:text="${reportemanager.descripcion}"></td>
-			<td th:text="${reportemanager.fechaReporte}"></td>
-			<td th:text="${reportemanager.estado}"></td>
+          <tr th:each="reporte : ${reportes}">
+  		<td th:text="${reporte.reporteID}"></td>
+            <td th:text="${reporte.area.nombreArea}"></td>
+			<td th:text="${reporte.zona.nombreZona}"></td>
+			<td th:text="${reporte.manager.nombreCompleto}"></td>
+			<td th:text="${reporte.titulo}"></td>
+			<td th:text="${reporte.descripcion}"></td>
+			<td th:text="${reporte.fechaReporte}"></td>
+			<td th:text="${reporte.estado}"></td>
             <td class="text-center">
-  			<a th:href="@{'/reportesmanager/editar/' + ${reportemanager.reporteID}}" 
+  			<a th:href="@{'/reportes/editar/' + ${reporte.reporteID}}" 
   			   class="btn btn-sm btn-outline-primary me-1">
   			  <i class="bi bi-pencil-square"></i> Editar
   			</a>
 
-  			<a th:href="@{'/reportesmanager/eliminar/' + ${reportemanager.reporteID}}" 
+  			<a th:href="@{'/reportes/eliminar/' + ${reporte.reporteID}}" 
   			   class="btn btn-sm btn-outline-danger"
   			   onclick="return confirm('¿Seguro que deseas desactivar este area?')">
   			  <i class="bi bi-trash"></i> Desactivar
@@ -72,7 +70,7 @@
           </tr>
 
           <!-- ✅ Si no hay usuarios -->
-  	  <tr th:if="${#lists.isEmpty(reportesmanager)}">
+  	  <tr th:if="${#lists.isEmpty(reportes)}">
   	    <td colspan="6" class="text-center text-muted">
   	      No hay roles registrados.
   	    </td>

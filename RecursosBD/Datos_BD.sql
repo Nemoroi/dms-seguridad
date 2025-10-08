@@ -7,7 +7,8 @@ INSERT INTO Rol (Nombre_Rol, Descripcion) VALUES
 ('Admin', 'Administrador con acceso completo'),
 ('ManagerSSOMA', 'Manager de seguridad y salud ocupacional'),
 ('UsuarioReportador', 'Usuario que registra reportes'),
-('UsuarioTecnico', 'Usuario que ejecuta planes de acción');
+('UsuarioTecnico', 'Usuario que ejecuta planes de acción'),
+('Jefatura', 'Usuario que pendientes de su area');
 
 -- ===========================================
 -- INSERTAR USUARIOS
@@ -17,22 +18,24 @@ INSERT INTO Usuario (Nombre_Completo, Usuario, Clave, Email, Telefono, RolID) VA
 ('Carlos Pérez', 'cperez', '1234', 'cperez@empresa.com', '987654321', 1), -- Admin
 ('Laura Gómez', 'lgomez', '1234', 'lgomez@empresa.com', '987654322', 2), -- ManagerSSOMA
 ('Juan Torres', 'jtorres', '1234', 'jtorres@empresa.com', '987654323', 3), -- Reportador
-('María Ruiz', 'mruiz', '1234', 'mruiz@empresa.com', '987654324', 4); -- Técnico
+('María Ruiz', 'mruiz', '1234', 'mruiz@empresa.com', '987654324', 4), -- Técnico
+('Daniel Alva', 'dalva', '1234', 'dalva@empresa.com', '987654324', 5), -- jefatura
+('Victor Matos', 'vmatos', '1234', 'vmatos@empresa.com', '987654324', 5); -- jefatura
 
 -- ===========================================
 -- INSERTAR ÁREAS
 -- ===========================================
-INSERT INTO Area (NombreArea, JefeID) VALUES
-('Producción', 1),  -- Carlos Pérez jefe
-('Mantenimiento', 2); -- Laura Gómez jefa
+INSERT INTO Area (Nombre_Area, JefeID) VALUES
+('Producción', 5),  -- Carlos Pérez jefe
+('Mantenimiento', 6); -- Laura Gómez jefa
 
 -- ===========================================
 -- INSERTAR ZONAS
 -- ===========================================
-INSERT INTO Zona (NombreZona, AreaID) VALUES
-('Zona Norte', 1),
-('Zona Sur', 1),
-('Zona Taller', 2);
+INSERT INTO Zona (Nombre_Zona, AreaID) VALUES
+('Molino', 1),
+('Extrusion', 1),
+('Taller', 2);
 
 -- ===========================================
 -- INSERTAR VISTAS
@@ -41,7 +44,12 @@ INSERT INTO Vistas (Nombre_Vista, Descripcion, Ruta) VALUES
 ('Usuarios', 'Módulo para mantenimiento de Usuarios', '/usuarios/listar'),
 ('Roles', 'Módulo para mantenimiento de Roles', '/roles/listar'),
 ('Vistas', 'Módulo para mantenimiento de vistas', '/vistas/listar'),
-('Asignacion de Vistas', 'Administración Vistas', '/rol_vistas/listar');
+('Asignacion de Vistas', 'Administración Vistas', '/rol_vistas/listar'),
+('Area', 'Administración Area', '/areas/listar'),
+('Zonas', 'Administración Zonas', '/zonas/listar'),
+('Reunion', 'Administración Reportes', '/reportesmanager/listar'),
+('Reporte', 'Registro Reportes', '/reportes/listar'),
+('Reporte jefatura', 'Administracion Reportes de Jefatura', '/reportesjefatura/listar');
 
 -- ===========================================
 -- ASIGNAR VISTAS A ROLES
@@ -51,10 +59,18 @@ INSERT INTO Rol_Vista (RolID, VistaID, Permisos) VALUES
 (1, 2, 'Admin'),   -- Admin ve todo
 (1, 3, 'Admin'),
 (1, 4, 'Admin'),
-(2, 2, 'Escritura'), -- Manager puede crear reportes
-(2, 3, 'Escritura'), -- Manager puede asignar planes
-(3, 2, 'Escritura'), -- Reportador puede crear reportes
-(4, 3, 'Escritura'); -- Técnico puede ejecutar planes
+(1, 5, 'Admin'),
+(1, 6, 'Admin'),
+(2, 1, 'Admin'),   -- Admin tiene dashboard admin
+(2, 2, 'Admin'),   -- Admin ve todo
+(2, 3, 'Admin'),
+(2, 4, 'Admin'),
+(2, 5, 'Admin'),
+(2, 6, 'Admin'),
+(2, 7, 'Admin'),
+(3, 8, 'Escritura'), -- Reportador puede crear reportes
+(4, 2, 'Escritura'),
+(5, 9, 'Escritura');  -- Técnico puede ejecutar planes
 
 -- ===========================================
 -- INSERTAR REPORTES

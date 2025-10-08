@@ -33,17 +33,17 @@ public class Reporte {
     @JoinColumn(name = "ManagerID", nullable = false)
     private Usuario manager;
 
-    @Column(nullable = false, length = 150)
+    @Column(name = "Titulo", nullable = false, length = 150)
     private String titulo;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(name = "Descripcion", nullable = false, columnDefinition = "TEXT")
     private String descripcion;
 
-    @Column(nullable = false)
+    @Column(name = "Fecha_Reporte", nullable = false)
     private LocalDateTime fechaReporte = LocalDateTime.now();
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "Estado", nullable = false)
     private EstadoReporte estado = EstadoReporte.Abierto;
 
     @OneToMany(mappedBy = "reporte")

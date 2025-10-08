@@ -34,7 +34,7 @@ CREATE TABLE Usuario (
 -- ===========================================
 CREATE TABLE Area (
     AreaID INT AUTO_INCREMENT PRIMARY KEY,
-    NombreArea VARCHAR(100) NOT NULL,
+    Nombre_Area VARCHAR(100) NOT NULL,
     JefeID INT NOT NULL,                -- Usuario jefe del área
     FOREIGN KEY (JefeID) REFERENCES Usuario(UsuarioID)
 );
@@ -44,7 +44,7 @@ CREATE TABLE Area (
 -- ===========================================
 CREATE TABLE Zona (
     ZonaID INT AUTO_INCREMENT PRIMARY KEY,
-    NombreZona VARCHAR(100) NOT NULL,
+    Nombre_Zona VARCHAR(100) NOT NULL,
     AreaID INT NOT NULL,
     FOREIGN KEY (AreaID) REFERENCES Area(AreaID)
 );
@@ -84,7 +84,7 @@ CREATE TABLE Reporte (
     ManagerID INT NOT NULL,             -- manager SSOMA revisor
     Titulo VARCHAR(150) NOT NULL,
     Descripcion TEXT NOT NULL,
-    FechaReporte TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Fecha_Reporte TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     Estado ENUM('Abierto','En Revisión','Con Planes de Acción','Cerrado') DEFAULT 'Abierto',
     FOREIGN KEY (UsuarioID) REFERENCES Usuario(UsuarioID),
     FOREIGN KEY (AreaID) REFERENCES Area(AreaID),
