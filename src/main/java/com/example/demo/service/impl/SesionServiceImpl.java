@@ -4,7 +4,7 @@ import com.example.demo.model.RolVistas;
 import com.example.demo.model.Vistas;
 import com.example.demo.repository.RolVistaRepository;
 import com.example.demo.repository.VistaRepository;
-import com.example.demo.service.VistaService;
+import com.example.demo.service.SesionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class VistaServiceImpl implements VistaService {
+public class SesionServiceImpl implements SesionService {
 
     private final RolVistaRepository rolVistasRepository;
     private final VistaRepository vistasRepository;

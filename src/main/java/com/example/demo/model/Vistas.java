@@ -1,12 +1,13 @@
 package com.example.demo.model;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @Entity
 @Table(name = "vistas")
@@ -29,7 +30,7 @@ public class Vistas {
     
     @Column(name = "Ruta")
     private String ruta;
-
+    
     @OneToMany(mappedBy = "vista")
     private List<RolVistas> rolVistas;
 

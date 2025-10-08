@@ -4,7 +4,7 @@ import com.example.demo.model.Usuario;
 import com.example.demo.model.Vistas;
 import com.example.demo.model.RolVistas;
 import com.example.demo.service.UsuarioService;
-import com.example.demo.service.VistaService;
+import com.example.demo.service.SesionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +20,7 @@ import java.util.Optional;
 public class LoginController {
 
     private final UsuarioService usuarioService;
-    private final VistaService vistaService;
+    private final SesionService vistaService;
 
     // ✅ Cuando se ingresa a http://localhost:8080/login/ → va directo al login
     @GetMapping("/")

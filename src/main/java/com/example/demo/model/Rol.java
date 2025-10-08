@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+//import java.util.List;
 
 @Entity
 @Table(name = "Rol")
@@ -22,11 +22,14 @@ public class Rol {
     @Column(name = "Descripcion", columnDefinition = "TEXT")
     private String descripcion;
 
+/*
+    
     // Relaciones
-    @OneToMany(mappedBy = "rol")
+    @OneToMany(mappedBy = "rol")	
     private List<Usuario> usuarios;
 
     @OneToMany(mappedBy = "rol")
     private List<RolVistas> rolVistas;
-
+*/
+    
 }

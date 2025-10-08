@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
+//import java.util.List;
 
 @Entity
 @Table(name = "usuario")
@@ -47,13 +46,11 @@ public class Usuario {
 
     @Column(name = "Fecha_Registro", nullable = false)
     private LocalDateTime fechaRegistro = LocalDateTime.now();
-
-
-    
+  
     @ManyToOne
     @JoinColumn(name = "RolID", nullable = false)
     private Rol rol;
-    
+/*    
     @OneToMany(mappedBy = "jefe")
     private List<Area> areasJefe;
 
@@ -63,8 +60,7 @@ public class Usuario {
     @OneToMany(mappedBy = "manager")
     private List<Reporte> reportesManager;
 
-
-
+*/
     public enum EstadoUsuario {
         Activo, Inactivo
     }
