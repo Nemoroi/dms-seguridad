@@ -2,48 +2,58 @@ package com.example.demo.model;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "Usuario")
+@Table(name = "usuario")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter @Setter
+@Builder
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "UsuarioID")
     private Integer usuarioID;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "Nombre_Completo", nullable = false)
     private String nombreCompleto;
 
-    @Column(nullable = false, unique = true, length = 50)
+    @Column(name = "Usuario", nullable = false, unique = true)
     private String usuario;
 
-    @Column(nullable = false, length = 255)
+    @Column(name = "Clave", nullable = false)
     private String clave;
 
-    @Column(unique = true, length = 100)
+    @Column(name = "Email", unique = true)
     private String email;
 
-    @Column(length = 20)
+    @Column(name = "Telefono")
     private String telefono;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "Estado", nullable = false)
     private EstadoUsuario estado = EstadoUsuario.Activo;
 
-    @Column(nullable = false)
+    @Column(name = "Fecha_Registro", nullable = false)
     private LocalDateTime fechaRegistro = LocalDateTime.now();
 
 
+    
     @ManyToOne
     @JoinColumn(name = "RolID", nullable = false)
     private Rol rol;
-
+    
     @OneToMany(mappedBy = "jefe")
     private List<Area> areasJefe;
 
@@ -53,7 +63,7 @@ public class Usuario {
     @OneToMany(mappedBy = "manager")
     private List<Reporte> reportesManager;
 
-    // Getters y Setters
+
 
     public enum EstadoUsuario {
         Activo, Inactivo

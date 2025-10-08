@@ -13,12 +13,13 @@ public class Rol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "RolID")
     private Integer rolID;
 
-    @Column(nullable = false, unique = true, length = 50)
+    @Column(name = "Nombre_Rol", nullable = false, unique = true)
     private String nombreRol;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "Descripcion", columnDefinition = "TEXT")
     private String descripcion;
 
     // Relaciones

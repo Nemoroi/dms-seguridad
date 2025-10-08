@@ -1,0 +1,59 @@
+/* ========== ESTILOS GLOBALES ========== */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 70px; /* espacio para el menú fijo */
+}
+
+/* ========== CONTENIDO PRINCIPAL ========== */
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+/* ========== NAVBAR FIJO SUPERIOR ========== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1030; /* sobre el contenido */
+}
+
+/* ========== FOOTER FIJO INFERIOR ========== */
+footer.footer-dark {
+  background-color: #212529;
+  color: #fff;
+  text-align: center;
+  padding: 0.8rem 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid #dee2e6;
+  z-index: 1020;
+}
+
+/* ========== TARJETAS Y SECCIONES ========== */
+.welcome {
+  background: linear-gradient(90deg, #007bff, #6610f2);
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.vista-card {
+  border-radius: 15px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vista-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}

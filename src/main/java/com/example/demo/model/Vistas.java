@@ -1,25 +1,34 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
-@Table(name = "Vistas")
-@Getter @Setter
+@Table(name = "vistas")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Vistas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "VistaID")
     private Integer vistaID;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "Nombre_Vista", nullable = false)
     private String nombreVista;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "Descripcion")
     private String descripcion;
+    
+    @Column(name = "Ruta")
+    private String ruta;
 
     @OneToMany(mappedBy = "vista")
     private List<RolVistas> rolVistas;
