@@ -16,7 +16,20 @@ public class AreaServiceImpl implements AreaService{
 
 	private final AreaRepository areaRepository;
 	
+	@Override
 	public List<Area> listarArea(){
 		return areaRepository.findAll();
+	}
+
+	@Override
+	public Area guardarArea(Area area) {
+		// TODO Auto-generated method stub
+		return areaRepository.save(area);
+	}
+
+	@Override
+	public void eliminarArea(Integer id) {
+		// TODO Auto-generated method stub
+		areaRepository.deleteById(id);
 	}
 }

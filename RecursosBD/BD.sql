@@ -35,7 +35,7 @@ CREATE TABLE Usuario (
 CREATE TABLE Area (
     AreaID INT AUTO_INCREMENT PRIMARY KEY,
     Nombre_Area VARCHAR(100) NOT NULL,
-    JefeID INT NOT NULL,                -- Usuario jefe del área
+    JefeID INT NULL,                -- Usuario jefe del área
     FOREIGN KEY (JefeID) REFERENCES Usuario(UsuarioID)
 );
 

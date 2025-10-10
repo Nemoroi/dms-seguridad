@@ -19,7 +19,7 @@ public class Area {
     private String nombreArea;
 
     @ManyToOne
-    @JoinColumn(name = "JefeID", nullable = false)
+    @JoinColumn(name = "JefeID", nullable = true)
     private Usuario jefe;
 
     @OneToMany(mappedBy = "area")

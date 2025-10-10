@@ -6,4 +6,6 @@ import com.example.demo.model.Area;
 
 public interface AreaService {
 List<Area> listarArea();
+Area guardarArea(Area area);
+void eliminarArea(Integer id);
 }

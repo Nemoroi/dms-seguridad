@@ -57,3 +57,28 @@ footer.footer-dark {
   transform: translateY(-4px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
+
+/* Aplicar overflow hidden desde el inicio para evitar destellos */
+.alert-auto-dismiss {
+  overflow: hidden;
+  animation: fadeAndSlideOut 0.5s ease-in-out 4s forwards;
+}
+
+/* Ajusta max-height inicial según tu contenido (ej. 300px o 500px) */
+@keyframes fadeAndSlideOut {
+  0% {
+    opacity: 1;
+    max-height: 500px;   /* inicial seguro para contenido alto */
+    margin-bottom: 1rem; /* margen original (bootstrap usa 1rem) */
+    padding-top: 0.75rem;   /* opcional: poner valores iniciales coherentes */
+    padding-bottom: 0.75rem;
+  }
+  100% {
+    opacity: 0;
+    max-height: 0;
+    margin:0;
+    padding:0;
+    /* overflow ya está en la regla base */
+  }
+}
+

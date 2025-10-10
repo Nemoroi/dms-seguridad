@@ -24,12 +24,23 @@
           <h1 class="text-primary mb-0">Areas</h1>
           <p class="mb-0">Bienvenido al módulo de mantenimiento de Areas.</p>
         </div>
-  	<!-- ✅ Botón para crear nuevo rol -->
-  	<a th:href="@{/Areas/nuevo}" class="btn btn-success">
-  	  <i class="bi bi-plus-circle"></i> + Rol
+  	
+		<!-- ✅ Botón para crear nuevo rol -->
+  	<a th:href="@{/areas/nuevo}" class="btn btn-success">
+  	  <i class="bi bi-plus-circle"></i> + Area
   	</a>
 
       </div>
+	  
+	  <!-- ✅ Mostrar mensaje de éxito si existe -->
+	  <div th:if="${mensaje}" 
+	       class="alert alert-success alert-dismissible fade show alert-auto-dismiss" 
+	       role="alert">
+	    <i class="bi bi-check-circle"></i>
+	    <span th:text="${mensaje}"></span>
+	    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	  </div>
+
 
       <table class="table table-striped table-hover mt-3 align-middle">
         <thead class="table-dark">
@@ -45,7 +56,7 @@
           <tr th:each="area : ${Areas}">
 			<td th:text="${area.areaID}"></td>
             <td th:text="${area.nombreArea}"></td>
-            <td th:text="${area.jefe.nombreCompleto}"></td>
+			<td th:text="${area.jefe?.nombreCompleto}">Sin jefe</td>
             <td class="text-center">
   			<a th:href="@{'/areas/editar/' + ${area.areaID}}" 
   			   class="btn btn-sm btn-outline-primary me-1">
