@@ -38,7 +38,7 @@ public class AreasController {
     @GetMapping("/nuevo")
     public String mostrarFormularioNuevaArea(Model model) {
         model.addAttribute("area", new Area());
-        model.addAttribute("jefes", usuarioService.listarUsuariosList()); // lista desplegable
+  //      model.addAttribute("jefes", usuarioService.listarUsuariosList()); // lista desplegable
         return "areas/crear";
     }
 
