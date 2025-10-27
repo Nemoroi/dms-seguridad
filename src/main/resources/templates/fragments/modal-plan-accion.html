@@ -1,0 +1,67 @@
+<!-- fragments/modal-plan-accion.html -->
+<div th:fragment="modalPlanAccion">
+  <div class="modal fade" id="modalPlanAccion" tabindex="-1" aria-labelledby="modalPlanAccionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content shadow">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="modalPlanAccionLabel">Nuevo Plan de Acción</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+
+        <div class="modal-body">
+          <form id="formPlanAccion" th:action="@{/planes/guardar}" th:object="${planAccion}" method="post">
+
+            <!-- Descripción del Plan -->
+            <div class="mb-3">
+              <label class="form-label fw-bold">Descripción:</label>
+              <textarea class="form-control" rows="3" th:field="*{descripcion}" required></textarea>
+            </div>
+
+			<div class="row align-items-center mb-3">
+			  <!-- Manager -->
+			  <div class="col-sm-6">
+			    <label class="form-label fw-bold">Manager:</label>
+			    <!-- Muestra el nombre, readonly -->
+			    <input type="text" class="form-control" th:value="${managerNombre}" readonly>
+			    <!-- Envía el ID -->
+				<!-- Manager: enviar solo el ID -->
+				<input type="hidden" name="managerId" th:value="${managerId}">
+
+			  </div>
+
+			  <!-- Responsable -->
+			  <div class="col-sm-6">
+			    <label class="form-label fw-bold">Responsable:</label>
+			    <select class="form-select" th:field="*{responsable}">
+			      <option value="" disabled selected>Seleccione</option>
+			      <option th:each="user : ${usuarios}" 
+			              th:value="${user.usuarioID}" 
+			              th:text="${user.nombreCompleto}">
+			      </option>
+			    </select>
+			  </div>
+			</div>
+
+
+            <!-- Fecha Compromiso -->
+            <div class="mb-3">
+              <label class="form-label fw-bold">Fecha de Compromiso:</label>
+              <input type="date" class="form-control" th:field="*{fechaCompromiso}" required>
+            </div>
+
+            <!-- Hidden: Reporte -->
+            <input type="hidden" th:field="*{reporte.reporteID}">
+
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" form="formPlanAccion" class="btn btn-success">
+            <i class="bi bi-check-circle"></i> Guardar Plan
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

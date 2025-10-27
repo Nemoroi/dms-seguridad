@@ -1,30 +1,60 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Usuarios | Sistema de Gestión</title>
+  <title>Planes de Acción | Sistema de Gestión</title>
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Tu CSS global -->
+  <!-- CSS global -->
   <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 
 <body>
-  <!-- ✅ Menú fijo (fragmento compartido) -->
+  <!-- Menú fijo -->
   <header th:replace="fragments/menu :: menu"></header>
 
-  <!-- ✅ Contenido principal -->
-  <!-- templates/contact.html -->
-  <div>
-      <h1>Planes de accion</h1>
-      <p>Contáctanos a través del correo: soporte@miapp.com</p>
+  <div class="container mt-4">
+      <h1>Planes de Acción</h1>
+      <p>Listado de planes asignados al usuario.</p>
+
+      <table class="table table-striped mt-3">
+          <thead class="table-dark">
+              <tr>
+                  <th>ID</th>
+                  <th>Reporte</th>
+                  <th>Descripción</th>
+                  <th>Responsable</th>
+                  <th>Fecha Compromiso</th>
+                  <th>Estado</th>
+                  <th>Descargar</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr th:each="plan : ${planes}">
+                  <td th:text="${plan.planID}"></td>
+                  <td th:text="${plan.reporte.titulo}"></td>
+                  <td th:text="${plan.descripcion}"></td>
+                  <td th:text="${plan.responsable.nombreCompleto}"></td>
+                  <td th:text="${plan.fechaCompromiso}"></td>
+                  <td th:text="${plan.estado}"></td>
+				  
+				  <td>
+				      <a th:href="@{/planes/verPlan/{id}(id=${plan.planID})}" class="btn btn-sm btn-primary">
+				          Completar
+				      </a>
+				  </td>
+
+              </tr>
+              <tr th:if="${planes.isEmpty()}">
+                  <td colspan="7" class="text-center">No hay planes asignados.</td>
+              </tr>
+          </tbody>
+      </table>
   </div>
 
-
-  <!-- ✅ Footer fijo (fragmento compartido) -->
+  <!-- Footer fijo -->
   <footer th:replace="fragments/footer :: footer"></footer>
 
   <!-- Bootstrap JS -->

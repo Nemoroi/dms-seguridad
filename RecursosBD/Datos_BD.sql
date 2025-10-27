@@ -49,7 +49,8 @@ INSERT INTO Vistas (Nombre_Vista, Descripcion, Ruta) VALUES
 ('Zonas', 'Administración Zonas', '/zonas/listar'),
 ('Reunion', 'Administración Reportes', '/reportesmanager/listar'),
 ('Reporte', 'Registro Reportes', '/reportes/listar'),
-('Reporte jefatura', 'Administracion Reportes de Jefatura', '/reportesjefatura/listar');
+('Reporte jefatura', 'Administracion Reportes de Jefatura', '/reportesjefatura/listar'),
+('Plan Asigando', 'Revsion de planes asignados', '/planes/listarPlanes');
 
 -- ===========================================
 -- ASIGNAR VISTAS A ROLES
@@ -59,25 +60,23 @@ INSERT INTO Rol_Vista (RolID, VistaID, Permisos) VALUES
 (1, 2, 'Admin'),   -- Admin ve todo
 (1, 3, 'Admin'),
 (1, 4, 'Admin'),
-(1, 5, 'Admin'),
-(1, 6, 'Admin'),
+(2, 7, 'Admin'),
 (2, 1, 'Admin'),   -- Admin tiene dashboard admin
 (2, 2, 'Admin'),   -- Admin ve todo
 (2, 3, 'Admin'),
 (2, 4, 'Admin'),
 (2, 5, 'Admin'),
 (2, 6, 'Admin'),
-(2, 7, 'Admin'),
 (3, 8, 'Escritura'), -- Reportador puede crear reportes
-(4, 2, 'Escritura'),
+(4, 10, 'Escritura'),
 (5, 9, 'Escritura');  -- Técnico puede ejecutar planes
 
 -- ===========================================
 -- INSERTAR REPORTES
 -- ===========================================
 INSERT INTO Reporte (UsuarioID, AreaID, ZonaID, ManagerID, Titulo, Descripcion) VALUES
-(3, 1, 1, 2, 'Fuga de aceite en máquina', 'Se detectó fuga en la prensa hidráulica en zona norte.'),
-(3, 1, 2, 2, 'Obstrucción en pasillo', 'Un palet bloquea la salida de emergencia en zona sur.');
+(3, 1, 1, null, 'Fuga de aceite en máquina', 'Se detectó fuga en la prensa hidráulica en zona norte.'),
+(3, 1, 2, null, 'Obstrucción en pasillo', 'Un palet bloquea la salida de emergencia en zona sur.');
 
 -- ===========================================
 -- INSERTAR REUNIONES
@@ -89,17 +88,17 @@ INSERT INTO Reunion (ReporteID, ManagerID, Observaciones) VALUES
 -- ===========================================
 -- INSERTAR PLANES DE ACCIÓN
 -- ===========================================
-INSERT INTO PlanAccion (ReunionID, Descripcion, ManagerID, ResponsableID, FechaCompromiso) VALUES
+INSERT INTO Plan_Accion (ReporteID, Descripcion, ManagerID, ResponsableID, FechaCompromiso) VALUES
 (1, 'Cambiar manguera hidráulica y limpiar área afectada', 2, 4, '2025-10-05'),
 (2, 'Retirar palet y señalizar pasillo', 2, 4, '2025-10-07');
 
 -- ===========================================
 -- ACTUALIZAR PLANES DE ACCIÓN (ejecución de uno)
 -- ===========================================
-UPDATE PlanAccion
+UPDATE Plan_Accion
 SET Estado = 'Ejecutado',
     FechaEjecucion = NOW(),
-    DescripcionEjecucion = 'Se retiró el palet y se colocaron señales de seguridad',
+    Descripcion_Ejecucion = 'Se retiró el palet y se colocaron señales de seguridad',
     Evidencia = 'evidencia_palet.jpg'
 WHERE PlanID = 2;
 

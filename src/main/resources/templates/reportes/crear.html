@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Nuevo Reporte</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Tu CSS global -->
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  </head>
+
+<body>
+<header th:replace="fragments/menu :: menu"></header>
+
+<main class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h4>Nuevo Reporte</h4>
+    </div>
+    <div class="card-body">
+      <form th:action="@{/reportes/guardar}" th:object="${reportenuevo}" method="post">
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label class="form-label">Área</label>
+			<select class="form-select" th:field="*{area.areaID}" id="areaSelect" required>
+              <option value="">Seleccione área</option>
+              <option th:each="a : ${areasnuevo}" th:value="${a.areaID}" th:text="${a.nombreArea}"></option>
+            </select>
+          </div>
+
+		    <div class="col-md-6">
+		      <label class="form-label">Zona</label>
+		      <select class="form-select" th:field="*{zona.zonaID}" id="zonaSelect" required>
+		        <option value="">Seleccione zona</option>
+		        <!-- Se llenará dinámicamente -->
+		      </select>
+		    </div>
+			</div>
+		  
+        <div class="row mb-3">
+
+          <div class="col-md-6">
+            <label class="form-label">Fecha</label>
+			<input type="datetime-local"
+			       class="form-control"
+			       th:field="*{fechaReporte}"
+			       th:value="${#temporals.format(reportenuevo.fechaReporte, 'yyyy-MM-dd''T''HH:mm')}" />
+
+
+          </div>
+
+          <div class="col-md-6">
+		    <label class="form-label">Título</label>
+		    <input type="text" class="form-control" th:field="*{titulo}" required>
+		  </div>
+		  
+        </div>
+
+
+        <div class="mb-3">
+          <label class="form-label">Descripción</label>
+          <textarea class="form-control" th:field="*{descripcion}" rows="4" required></textarea>
+        </div>
+
+
+        <div class="d-flex justify-content-end">
+          <a th:href="@{/reportes/listar}" class="btn btn-secondary me-2">Cancelar</a>
+          <button type="submit" class="btn btn-success">Guardar</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const areaSelect = document.getElementById("areaSelect");
+    const zonaSelect = document.getElementById("zonaSelect");
+
+    areaSelect.addEventListener("change", function() {
+      const areaId = areaSelect.value;
+
+      // Mensaje temporal mientras se cargan las zonas
+      zonaSelect.innerHTML = '<option value="" disabled selected>Cargando zonas...</option>';
+
+      fetch(`/zonas/porArea/${areaId}`)
+        .then(response => {
+          if (!response.ok) throw new Error("Error al cargar zonas");
+          return response.json();
+        })
+        .then(data => {
+          // Reiniciar el select con la opción por defecto
+          zonaSelect.innerHTML = '<option value="" disabled selected>Seleccione zona</option>';
+
+          // Agregar las zonas recibidas del servidor
+          data.forEach(z => {
+            const option = document.createElement("option");
+            option.value = z.zonaID;
+            option.textContent = z.nombreZona;
+            zonaSelect.appendChild(option);
+          });
+        })
+        .catch(err => {
+          console.error(err);
+          zonaSelect.innerHTML = '<option value="" disabled selected>Error al cargar zonas</option>';
+        });
+    });
+  });
+</script>
+
+</body>
+</html>

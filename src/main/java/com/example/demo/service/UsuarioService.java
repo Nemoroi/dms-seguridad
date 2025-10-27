@@ -12,5 +12,6 @@ public interface UsuarioService {
     Optional<Usuario> findByUsuario(String usuario);
     Usuario save(Usuario usuario);
     List<Usuario> listarUsuariosList();
-    
+    List<Usuario> listarManagers(); 
+    Usuario buscarPorId(Integer id);
 }

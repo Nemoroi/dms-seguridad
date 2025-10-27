@@ -81,7 +81,7 @@ CREATE TABLE Reporte (
     UsuarioID INT NOT NULL,             -- quien reporta
     AreaID INT NOT NULL,
     ZonaID INT NOT NULL,
-    ManagerID INT NOT NULL,             -- manager SSOMA revisor
+    ManagerID INT,             -- manager SSOMA revisor
     Titulo VARCHAR(150) NOT NULL,
     Descripcion TEXT NOT NULL,
     Fecha_Reporte TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -98,8 +98,8 @@ CREATE TABLE Reporte (
 CREATE TABLE Reunion (
     ReunionID INT AUTO_INCREMENT PRIMARY KEY,
     ReporteID INT NOT NULL,
-    ManagerID INT NOT NULL,             -- quién dirige la reunión
-    FechaReunion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ManagerID INT,             -- quién dirige la reunión
+    Fecha_Reunion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     Observaciones TEXT,
     FOREIGN KEY (ReporteID) REFERENCES Reporte(ReporteID),
     FOREIGN KEY (ManagerID) REFERENCES Usuario(UsuarioID)
@@ -108,32 +108,32 @@ CREATE TABLE Reunion (
 -- ===========================================
 -- TABLA PLANES DE ACCIÓN
 -- ===========================================
-CREATE TABLE PlanAccion (
+CREATE TABLE Plan_Accion (
     PlanID INT AUTO_INCREMENT PRIMARY KEY,
-    ReunionID INT NOT NULL,             -- pertenece a una reunión
+    ReporteID INT NOT NULL,             -- pertenece a una reunión
     Descripcion TEXT NOT NULL,          -- acción a ejecutar
 
-    ManagerID INT NOT NULL,             -- manager asignado/creador
+    ManagerID INT,             -- manager asignado/creador
     ResponsableID INT NOT NULL,         -- usuario encargado de ejecutar
 
-    FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Fecha_Creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FechaCompromiso DATE,               -- fecha límite
 
     -- datos de ejecución
-    FechaEjecucion TIMESTAMP NULL,      
-    DescripcionEjecucion TEXT NULL,     
+    Fecha_Ejecucion TIMESTAMP NULL,      
+    Descripcion_Ejecucion TEXT NULL,     
     Evidencia VARCHAR(255) NULL,        
 
     -- cierre por manager
-    FechaCierre TIMESTAMP NULL,         
-    ManagerCierraID INT NULL,           
+    Fecha_Cierre TIMESTAMP NULL,         
+    Manager_CierraID INT NULL,           
 
     Estado ENUM('Pendiente','En Proceso','Ejecutado','Cerrado') DEFAULT 'Pendiente',
 
-    FOREIGN KEY (ReunionID) REFERENCES Reunion(ReunionID),
+    FOREIGN KEY (ReporteID) REFERENCES Reporte(ReporteID),
     FOREIGN KEY (ManagerID) REFERENCES Usuario(UsuarioID),
     FOREIGN KEY (ResponsableID) REFERENCES Usuario(UsuarioID),
-    FOREIGN KEY (ManagerCierraID) REFERENCES Usuario(UsuarioID)
+    FOREIGN KEY (Manager_CierraID) REFERENCES Usuario(UsuarioID)
 );
 
 -- ===========================================
@@ -147,6 +147,6 @@ CREATE TABLE PlanAccion_Historial (
     EstadoNuevo VARCHAR(20),
     FechaCambio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     Comentario TEXT,
-    FOREIGN KEY (PlanID) REFERENCES PlanAccion(PlanID),
+    FOREIGN KEY (PlanID) REFERENCES Plan_Accion(PlanID),
     FOREIGN KEY (UsuarioID) REFERENCES Usuario(UsuarioID)
 );

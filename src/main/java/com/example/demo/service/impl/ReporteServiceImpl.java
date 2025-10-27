@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -21,4 +22,21 @@ public class ReporteServiceImpl implements ReporteService{
         return reporteRepository.findByUsuario_UsuarioID(usuarioID);
     }
 
+    @Override
+    public Reporte guardar(Reporte reporte) {
+        return reporteRepository.save(reporte);
+    }
+    
+    @Override
+    public List<Reporte> listarTodos() {
+        return reporteRepository.findAll();
+    }
+
+    // ✅ Para buscar un reporte por ID (necesario para /reuniones/crear/{reporteID})
+    @Override
+    public Reporte buscarPorId(Integer reporteID) {
+        Optional<Reporte> optional = reporteRepository.findById(reporteID);
+        return optional.orElse(null);
+    }
+    
 }

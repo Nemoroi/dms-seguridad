@@ -5,4 +5,5 @@ import com.example.demo.model.Zona;
 
 public interface ZonaService {
 	List<Zona> listarZona();
+	List<Zona> listarPorArea(Integer areaId);
 }

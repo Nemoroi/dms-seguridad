@@ -5,9 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
-
-
 
 @Entity
 @Table(name = "Reunion")
@@ -26,13 +23,11 @@ public class Reunion {
     @JoinColumn(name = "ManagerID", nullable = false)
     private Usuario manager;
 
-    @Column(nullable = false)
+    @Column(name = "fecha_reunion", nullable = false)
     private LocalDateTime fechaReunion = LocalDateTime.now();
 
     @Column(columnDefinition = "TEXT")
     private String observaciones;
 
-    @OneToMany(mappedBy = "reunion")
-    private List<PlanAccion> planes;
-
+    
 }

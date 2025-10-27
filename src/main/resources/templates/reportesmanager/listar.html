@@ -52,22 +52,17 @@
             <td th:text="${reportemanager.usuario.nombreCompleto}"></td>
             <td th:text="${reportemanager.area.nombreArea}"></td>
 			<td th:text="${reportemanager.zona.nombreZona}"></td>
-			<td th:text="${reportemanager.manager.nombreCompleto}"></td>
+			<td th:text="${reportemanager.manager?.nombreCompleto ?: 'Sin asignar'}"></td>
 			<td th:text="${reportemanager.titulo}"></td>
 			<td th:text="${reportemanager.descripcion}"></td>
 			<td th:text="${reportemanager.fechaReporte}"></td>
 			<td th:text="${reportemanager.estado}"></td>
             <td class="text-center">
-  			<a th:href="@{'/reportesmanager/editar/' + ${reportemanager.reporteID}}" 
+  			<a th:href="@{'/reuniones/crear/' + ${reportemanager.reporteID}}" 
   			   class="btn btn-sm btn-outline-primary me-1">
-  			  <i class="bi bi-pencil-square"></i> Editar
+  			  <i class="bi bi-pencil-square"></i> Revision
   			</a>
 
-  			<a th:href="@{'/reportesmanager/eliminar/' + ${reportemanager.reporteID}}" 
-  			   class="btn btn-sm btn-outline-danger"
-  			   onclick="return confirm('¿Seguro que deseas desactivar este area?')">
-  			  <i class="bi bi-trash"></i> Desactivar
-  			</a>	
             </td>
           </tr>
 

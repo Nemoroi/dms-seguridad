@@ -30,7 +30,7 @@ public class Reporte {
     private Zona zona;
 
     @ManyToOne
-    @JoinColumn(name = "ManagerID", nullable = false)
+    @JoinColumn(name = "ManagerID", nullable = true)
     private Usuario manager;
 
     @Column(name = "Titulo", nullable = false, length = 150)

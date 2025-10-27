@@ -19,4 +19,9 @@ public class ZonaServiceImpl implements ZonaService{
 		public List<Zona> listarZona(){
 		 return zonaRepository.findAll();	
 		}
+		
+	    @Override
+	    public List<Zona> listarPorArea(Integer areaId) {
+	        return zonaRepository.findByAreaAreaID(areaId);
+	    }
 }
